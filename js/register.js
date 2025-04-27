@@ -1,37 +1,23 @@
-document.getElementById('register-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    let email = document.querySelector("#email").value;
+    let password = document.querySelector("#password").value;
 
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
+    // Menampilkan data yang akan dikirim untuk debugging
+    console.log("Data yang akan dikirim:", { email, password });
 
-    // Cek data yang akan dikirim
-    console.log('Data yang akan dikirim:', { email, password });
-
-    const webAppURL = 'https://script.google.com/macros/s/AKfycbxQT5XtGqzjY8EwZHQR7mrfCfvJ8FtXsixgnYk3SRglTzzLVCwYXl2NxSoOHvU01OjP1A/exec'; // Ganti dengan URL Web App kamu
-
-    try {
-        // Melakukan fetch untuk mengirim data registrasi
-        const response = await fetch(webAppURL, {
-            method: 'POST',
-            body: JSON.stringify({ email, password }),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors',  // Pastikan menggunakan mode 'cors'
-        });
-
-        // Mengecek response dari server
-        const data = await response.json();
-
-        if (data.success) {
-            alert(data.message);
-            window.location.href = './index.html'; // Redirect ke halaman login setelah registrasi berhasil
-        } else {
-            alert(data.message); // Menampilkan pesan error jika ada
-        }
-
-    } catch (err) {
-        console.error(err);
-        alert('Terjadi kesalahan saat registrasi. Silakan coba lagi.');
-    }
+    fetch('https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbxQT5XtGqzjY8EwZHQR7mrfCfvJ8FtXsixgnYk3SRglTzzLVCwYXl2NxSoOHvU01OjP1A/exec', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from Google Apps Script:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 });
