@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | My Auth Web</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Masuk Akun</h2>
+      <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit" class="btn-primary">Masuk</button>
+      </form>
+
+      <div class="separator">atau masuk dengan</div>
+
+      <div id="google-login"></div>
+
+      <p class="link">
+        Belum punya akun? <a href="./register.html">Daftar Sekarang</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="./js/login.js"></script>
+</body>
+</html>
